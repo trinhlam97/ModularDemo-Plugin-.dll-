@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="QLGV_Module.Views.QLGV"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:QLGV_Module.ViewModels"
+             xmlns:views="clr-namespace:QLGV_Module.Views"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             mc:Ignorable="d" d:DesignHeight="500"
+             d:DataContext="{dxmvvm:ViewModelSource viewModels:QLGVModel}" Width="274.6"
+             >
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Content="MaGV" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+            <Label Grid.Column="0" Grid.Row="1" Content="Tên GV" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+            <Label Grid.Column="0" Grid.Row="2" Content="Lớp" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+            <TextBox Grid.Column="1" Grid.Row="0" Name="txtMaGV" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="12" IsEnabled="False"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Name="txtTenGV" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="12"/>
+            <ComboBox Grid.Column="1" Grid.Row="2" Name="cbbLop" Margin="5" ItemsSource="{Binding}" DisplayMemberPath="Ten" SelectedIndex="0"></ComboBox>
+            <StackPanel  Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+                <Button Name="btnAdd" Content="Thêm" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnAdd_Click"/>
+                <Button Name="btnUpdate" Content="Sửa" Margin="20,0,0,0" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btnUpdate_Click"/>
+
+            </StackPanel>
+
+        </Grid>
+        <DataGrid Grid.Row="1" Name="datagrid" ItemsSource="{Binding}" SelectedCellsChanged="datagrid_SelectedCellsChanged" SelectedItem="{Binding Path=SelectedCustomer, Mode=TwoWay}" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="MaGV" Binding="{Binding MaGV, Mode=OneWay}" Width="60"  />
+                <DataGridTextColumn Header="TenGV" Binding="{Binding TenGV, Mode=OneWay}" Width="100" />
+                <DataGridTextColumn Header="Lop" Binding="{Binding Lop.Ten, Mode=OneWay}" Width="60"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
